@@ -22,14 +22,7 @@ public class Pole extends TextField {
     public Pole(int id) {
         this.id = id;
         this.textPole = new TextField(null);
-        this.textPole.setMinWidth(63);
-        this.textPole.setPrefWidth(63);
-        this.textPole.setMaxWidth(63);
 
-        this.textPole.setMinHeight(63);
-        this.textPole.setPrefHeight(63);
-        this.textPole.setMaxHeight(63);
-        this.textPole.setAlignment(Pos.CENTER);
     }
 
 
