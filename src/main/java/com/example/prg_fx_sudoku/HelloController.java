@@ -153,14 +153,14 @@ public class HelloController {
     }
 
     @FXML
-    public void OnUzamknoutZadani(){
-        for(int row = 0; row < 9; row++) {
+    public void OnUzamknoutZadani() {
+        for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 String text = policka[row][col].getText();
 
                 if (text == null || text.trim().isEmpty() || text.trim().equals("0")) {
 
-                }else{
+                } else {
                     policka[row][col].setDisable(true);
                 }
             }
