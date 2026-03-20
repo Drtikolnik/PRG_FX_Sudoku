@@ -1,10 +1,9 @@
 package com.example.prg_fx_sudoku;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
@@ -66,6 +65,7 @@ public class HelloController {
 
         for (int cislo : poleCisel) {
             if (cislo == 0) {
+                if()
                 continue;
             }
 
@@ -136,9 +136,9 @@ public class HelloController {
     public void onKontrolaZadani(){
         nacteniCisel();
         if(!jeZkontrolovaneASpravne()){
-            System.out.println("ŠPATNÉ ZADÁNÍ");
+            handleShowKontrola("Kontrola zadání", "ŠPATNÉ ZADÁNÍ!", "zadej jinak!");
         }else{
-            System.out.println("SPRÁVNÉ ZADÁNÍ");
+            handleShowKontrola("Kontrola zadání", "SPRÁVNÉ ZADÁNÍ!", "výborně!");
         }
         
     }
@@ -146,9 +146,9 @@ public class HelloController {
     public void onKontrolaReseni(){
         nacteniCisel();
         if(!jeZkontrolovaneASpravne()){
-            System.out.println("ŠPATNÉ ŘEŠENÍ");
+            handleShowKontrola("Kontrola řešení", "ŠPATNÉ ŘEŠNÍ!", "zadej jinak!");
         }else{
-            System.out.println("SPRÁVNÉ ŘEŠNÍ!!!");
+            handleShowKontrola("Kontrola řešení", "SPRÁVNÉ ŘEŠENÍ!", "výborně!");
         }
     }
 
@@ -168,8 +168,15 @@ public class HelloController {
 
     }
 
-    
 
+    @FXML
+    public void handleShowKontrola(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
     public void initialize(){
         displayFields();
