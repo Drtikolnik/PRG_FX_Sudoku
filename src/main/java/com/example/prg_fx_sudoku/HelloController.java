@@ -60,13 +60,17 @@ public class HelloController {
         }
     }
 
-    public boolean jeSpravne(int[] poleCisel) {
+    public boolean jeSpravne(int[] poleCisel, boolean zadani) {
         boolean[] videno = new boolean[10];
 
         for (int cislo : poleCisel) {
             if (cislo == 0) {
-                if()
-                continue;
+                if(zadani){
+                    continue;
+                }else{
+                    return false;
+                }
+
             }
 
             if (videno[cislo]) {
@@ -78,7 +82,7 @@ public class HelloController {
         return true;
     }
     
-    public boolean jeZkontrolovaneASpravne() {
+    public boolean jeZkontrolovaneASpravne(boolean zadani) {
         nacteniCisel();
         boolean spravne = true;
 
@@ -89,7 +93,7 @@ public class HelloController {
                 radek[col] = cisla[row][col];
             }
 
-            if (!jeSpravne(radek)) {
+            if (!jeSpravne(radek, zadani)) {
                 System.out.println("Chyba v řádku číslo: " +(row + 1));
                 return false;
             }
@@ -102,7 +106,7 @@ public class HelloController {
                 sloupec[col] = cisla[row][col];
             }
 
-            if (!jeSpravne(sloupec)) {
+            if (!jeSpravne(sloupec, zadani)) {
                 System.out.println("Chyba ve sloupci číslo: " + (col + 1));
                 return false;
             }
@@ -122,7 +126,7 @@ public class HelloController {
                     }
                 }
 
-                if (!jeSpravne(blok)) {
+                if (!jeSpravne(blok, zadani)) {
                     System.out.println("Chyba v bloku na řádku číslo: " +(startRow + 1)+ ", a ve sloupci číslo: " +(startRow + 1));
                     return false;
                 }
@@ -134,8 +138,9 @@ public class HelloController {
 
 
     public void onKontrolaZadani(){
+        boolean zadani = true;
         nacteniCisel();
-        if(!jeZkontrolovaneASpravne()){
+        if(!jeZkontrolovaneASpravne(zadani)){
             handleShowKontrola("Kontrola zadání", "ŠPATNÉ ZADÁNÍ!", "zadej jinak!");
         }else{
             handleShowKontrola("Kontrola zadání", "SPRÁVNÉ ZADÁNÍ!", "výborně!");
@@ -144,8 +149,9 @@ public class HelloController {
     }
     
     public void onKontrolaReseni(){
+        boolean zadani = false;
         nacteniCisel();
-        if(!jeZkontrolovaneASpravne()){
+        if(!jeZkontrolovaneASpravne(zadani)){
             handleShowKontrola("Kontrola řešení", "ŠPATNÉ ŘEŠNÍ!", "zadej jinak!");
         }else{
             handleShowKontrola("Kontrola řešení", "SPRÁVNÉ ŘEŠENÍ!", "výborně!");
