@@ -60,17 +60,20 @@ public class HelloController {
         }
     }
 
-    public boolean jeSpravne(int[] poleCisel, boolean zadani) {
+    public boolean jeSpravne(int[] poleCisel, boolean jeZadani) {
         boolean[] videno = new boolean[10];
 
         for (int cislo : poleCisel) {
             if (cislo == 0) {
-                if(zadani){
+                if(jeZadani){
                     continue;
                 }else{
                     return false;
                 }
+            }
 
+            if(cislo > 9){
+                return false;
             }
 
             if (videno[cislo]) {
@@ -82,9 +85,8 @@ public class HelloController {
         return true;
     }
     
-    public boolean jeZkontrolovaneASpravne(boolean zadani) {
+    public boolean jeZkontrolovaneASpravne(boolean jeZadani) {
         nacteniCisel();
-        boolean spravne = true;
 
         //radky
         for(int row = 0; row < 9; row++) {
@@ -93,7 +95,7 @@ public class HelloController {
                 radek[col] = cisla[row][col];
             }
 
-            if (!jeSpravne(radek, zadani)) {
+            if (!jeSpravne(radek, jeZadani)) {
                 System.out.println("Chyba v řádku číslo: " +(row + 1));
                 return false;
             }
@@ -103,10 +105,10 @@ public class HelloController {
         for(int col = 0; col < 9; col++) {
             int[] sloupec = new int[9];
             for(int row = 0; row < 9; row++) {
-                sloupec[col] = cisla[row][col];
+                sloupec[row] = cisla[row][col];
             }
 
-            if (!jeSpravne(sloupec, zadani)) {
+            if (!jeSpravne(sloupec, jeZadani)) {
                 System.out.println("Chyba ve sloupci číslo: " + (col + 1));
                 return false;
             }
@@ -126,7 +128,7 @@ public class HelloController {
                     }
                 }
 
-                if (!jeSpravne(blok, zadani)) {
+                if (!jeSpravne(blok, jeZadani)) {
                     System.out.println("Chyba v bloku na řádku číslo: " +(startRow + 1)+ ", a ve sloupci číslo: " +(startRow + 1));
                     return false;
                 }
@@ -138,9 +140,9 @@ public class HelloController {
 
 
     public void onKontrolaZadani(){
-        boolean zadani = true;
+        boolean jeZadani = true;
         nacteniCisel();
-        if(!jeZkontrolovaneASpravne(zadani)){
+        if(!jeZkontrolovaneASpravne(jeZadani)){
             handleShowKontrola("Kontrola zadání", "ŠPATNÉ ZADÁNÍ!", "zadej jinak!");
         }else{
             handleShowKontrola("Kontrola zadání", "SPRÁVNÉ ZADÁNÍ!", "výborně!");
@@ -149,9 +151,9 @@ public class HelloController {
     }
     
     public void onKontrolaReseni(){
-        boolean zadani = false;
+        boolean jeZadani = false;
         nacteniCisel();
-        if(!jeZkontrolovaneASpravne(zadani)){
+        if(!jeZkontrolovaneASpravne(jeZadani)){
             handleShowKontrola("Kontrola řešení", "ŠPATNÉ ŘEŠNÍ!", "zadej jinak!");
         }else{
             handleShowKontrola("Kontrola řešení", "SPRÁVNÉ ŘEŠENÍ!", "výborně!");
@@ -174,6 +176,71 @@ public class HelloController {
 
     }
 
+    @FXML
+    public void OnVymazatPokus() {
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if(!policka[row][col].isDisabled()) {
+                    policka[row][col].clear();
+                }
+
+
+            }
+        }
+
+    }
+
+    @FXML
+    public void OnVymazatCelePole() {
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                policka[row][col].clear();
+                policka[row][col].setDisable(false);
+            }
+        }
+
+    }
+
+    @FXML
+    public void displayZadani() {
+        policka[0][0].setText("5 ");
+        policka[0][1].setText("3");
+        policka[0][4].setText("7");
+        policka[1][0].setText("6");
+        policka[1][3].setText("1");
+        policka[1][4].setText("9");
+        policka[1][5].setText("5");
+        policka[2][1].setText("9");
+        policka[2][2].setText("8");
+        policka[2][7].setText("6");
+        policka[3][0].setText("8");
+        policka[3][4].setText("6");
+        policka[3][8].setText("3");
+        policka[4][0].setText("4");
+        policka[4][3].setText("8");
+        policka[4][5].setText("3");
+        policka[4][8].setText("1");
+        policka[5][0].setText("7");
+        policka[5][4].setText("2");
+        policka[5][8].setText("6");
+        policka[6][1].setText("6");
+        policka[6][6].setText("2");
+        policka[6][7].setText("8");
+        policka[7][3].setText("4");
+        policka[7][4].setText("1");
+        policka[7][5].setText("9");
+        policka[7][8].setText("5");
+        policka[8][4].setText("8");
+        policka[8][7].setText("7");
+        policka[8][8].setText("9");
+    }
+
+    @FXML
+    public void OnGenerovatZadani() {
+
+    }
+
+
 
     @FXML
     public void handleShowKontrola(String title, String header, String content) {
@@ -186,6 +253,7 @@ public class HelloController {
 
     public void initialize(){
         displayFields();
+        displayZadani();
     }
 
 

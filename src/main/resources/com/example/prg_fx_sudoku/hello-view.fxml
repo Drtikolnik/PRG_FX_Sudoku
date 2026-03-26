@@ -37,17 +37,17 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
          <children>
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" text="Restart pokusu" />
+            <Button mnemonicParsing="false" onAction="#OnVymazatPokus" prefHeight="60.0" prefWidth="150.0" text="Restart pokusu" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <children>
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" text="Vymazání celého pole" />
+            <Button mnemonicParsing="false" onAction="#OnVymazatCelePole" prefHeight="60.0" prefWidth="150.0" text="Vymazání celého pole" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
          <children>
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" text="Generování zadání" />
+            <Button mnemonicParsing="false" onAction="#OnGenerovatZadani" prefHeight="60.0" prefWidth="150.0" text="Generování zadání" />
          </children>
       </HBox>
       <GridPane fx:id="grid1" minHeight="450.0" minWidth="450.0" GridPane.columnSpan="3" GridPane.rowSpan="3">
